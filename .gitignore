@@ -1,0 +1,18 @@
+# Java / Maven
+backend/target/
+*.class
+# Secrets / local configs
+.env
+.env.*
+!.env.example
+application-local.yml
+# Editores
+.idea/
+.vscode/
+*.iml
+# OS
+.DS_Store
+Thumbs.db
+# Logs
+*.log
+.itspa-tmp/

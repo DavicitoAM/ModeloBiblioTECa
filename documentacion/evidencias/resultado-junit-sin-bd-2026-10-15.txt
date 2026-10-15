@@ -1,0 +1,82 @@
+ITSPA - Ejecucion directa de JUnit Jupiter (sin Maven Surefire)
+Fecha: 2026-10-15T14:43:28.785671600-06:00
+JDK: 21.0.12.1; JUnit: 5.12.2
+Seleccion explicita: 7 clases sin BD; ModeloPersistenciaIntegracionTest excluida.
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: buscarRechazaUnLibroInexistente()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: listarDevuelveVariosLibrosComoDtosConSusDatos()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: registrarConvierteIsbnDeEspaciosEnNulo()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: registrarConvierteIsbnVacioEnNulo()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: buscarDevuelveLosDatosDelLibroExistente()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: registrarRechazaIsbnDuplicadoTrasRecortarSinGuardar()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: listarDevuelveUnaListaVaciaCuandoNoHayLibros()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: registrarAdmiteIsbnNulo()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: registrarDevuelveTodosLosCamposYRecortaElTitulo()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroServicioTest :: registrarRecortaLosEspaciosExterioresDelIsbn()
+SUCCESSFUL mx.edu.itspa.biblioteca.EjemplarServicioTest :: listarPorLibroDevuelveVariosDtosConSuEstadoConsultado()
+SUCCESSFUL mx.edu.itspa.biblioteca.EjemplarServicioTest :: registrarRechazaLibroInexistenteSinGuardarEjemplar()
+SUCCESSFUL mx.edu.itspa.biblioteca.EjemplarServicioTest :: registrarRelacionaLibroRecortaCodigoYConservaFechaYCondicionFisica()
+SUCCESSFUL mx.edu.itspa.biblioteca.EjemplarServicioTest :: registrarRechazaCodigoDuplicadoTrasRecortarSinGuardar()
+SUCCESSFUL mx.edu.itspa.biblioteca.EjemplarServicioTest :: listarRechazaLibroInexistenteSinConsultarEjemplares()
+SUCCESSFUL mx.edu.itspa.biblioteca.EjemplarServicioTest :: registrarSinFechaUtilizaElDiaDeLaOperacion()
+SUCCESSFUL mx.edu.itspa.biblioteca.EjemplarServicioTest :: listarPorLibroExistenteSinCopiasDevuelveListaVacia()
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [1] libroId=null
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [2] libroId=0
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [3] libroId=-1
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: aceptaLibroConIsbnYPaginasOpcionalesNulos()
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [1] codigo=null
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [2] codigo=
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [3] codigo= 
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [4] codigo=	
+
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [1] paginas=0
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [2] paginas=-1
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: aceptaLibroConDatosBibliograficosYPaginaMinima()
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: aceptaEjemplarConFechaDeAdquisicionOpcionalNula()
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: rechazaConservacionNula()
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [1] titulo=null
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [2] titulo=
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [3] titulo= 
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: [4] titulo=	
+
+SUCCESSFUL mx.edu.itspa.biblioteca.ValidacionSolicitudesTest :: aceptaEjemplarConFechaDeAdquisicionIndicada()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroEjemplarRelacionTest :: agregarLaMismaInstanciaNoDuplicaLaAsociacion()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroEjemplarRelacionTest :: agregarVariosEjemplaresMantieneAmbosExtremos()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroEjemplarRelacionTest :: rechazaNuloSinAlterarLasRelacionesExistentes()
+SUCCESSFUL mx.edu.itspa.biblioteca.LibroEjemplarRelacionTest :: trasladarEjemplarActualizaLosDosLibrosYConservaLosDemas()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: traducirCodigoDuplicadoA409ConErrorJson()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: listarLibrosResponde200ConArregloDeDtos()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: rechazarIdDeRutaNoNumericoAntesDeDelegar()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: rechazarParametroLibroIdNoNumericoAntesDeDelegar()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: registrarEjemplarResponde201ConFechaIsoEnumsYBooleano()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: registrarLibroResponde201ConDtoJson()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: libro invalido [1] devuelve 400 sin delegar
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: libro invalido [2] devuelve 400 sin delegar
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: consultarLibroPorIdResponde200()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: rechazarListadoSinParametroLibroIdAntesDeDelegar()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: traducirLibroInexistenteEnAltaDeEjemplarA404()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: ejemplar invalido [1] devuelve 400 sin delegar
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: ejemplar invalido [2] devuelve 400 sin delegar
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: ejemplar invalido [3] devuelve 400 sin delegar
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: ejemplar invalido [4] devuelve 400 sin delegar
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: traducirIsbnDuplicadoA409ConErrorJson()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: traducirLibroNoEncontradoA404ConErrorJson()
+SUCCESSFUL mx.edu.itspa.biblioteca.ApiPilotoTest :: listarEjemplaresPorLibroResponde200()
+SUCCESSFUL mx.edu.itspa.biblioteca.ModeloMetadatosTest :: todasLasEntidadesFormanUnUnicoModeloJpaValidoSinAccederABd()
+SUCCESSFUL mx.edu.itspa.biblioteca.GuardiaBasePruebasTest :: permiteLaBaseDeTest()
+SUCCESSFUL mx.edu.itspa.biblioteca.GuardiaBasePruebasTest :: rechazaTestSiDbUrlApuntaAlMismoDestino()
+SUCCESSFUL mx.edu.itspa.biblioteca.GuardiaBasePruebasTest :: rechazaLaBaseNormalAntesDeIniciarFlyway()
+SUCCESSFUL mx.edu.itspa.biblioteca.GuardiaBasePruebasTest :: rechazaOverrideDeHikari()
+SUCCESSFUL mx.edu.itspa.biblioteca.GuardiaBasePruebasTest :: rechazaUnaBaseDistintaDePostgres()
+SUCCESSFUL mx.edu.itspa.biblioteca.GuardiaBasePruebasTest :: rechazaElMismoDestinoConAliasLocalDistinto()
+SUCCESSFUL mx.edu.itspa.biblioteca.GuardiaBasePruebasTest :: rechazaDatasourceIndependienteDeFlyway()
+SUCCESSFUL mx.edu.itspa.biblioteca.GuardiaBasePruebasTest :: rechazaJndiNoInspeccionable()
+
+Resumen por clase: ejecutadas / correctas / fallidas-abortadas / omitidas
+mx.edu.itspa.biblioteca.LibroServicioTest : 10 / 10 / 0 / 0
+mx.edu.itspa.biblioteca.EjemplarServicioTest : 7 / 7 / 0 / 0
+mx.edu.itspa.biblioteca.ValidacionSolicitudesTest : 18 / 18 / 0 / 0
+mx.edu.itspa.biblioteca.LibroEjemplarRelacionTest : 4 / 4 / 0 / 0
+mx.edu.itspa.biblioteca.ApiPilotoTest : 18 / 18 / 0 / 0
+mx.edu.itspa.biblioteca.ModeloMetadatosTest : 1 / 1 / 0 / 0
+mx.edu.itspa.biblioteca.GuardiaBasePruebasTest : 8 / 8 / 0 / 0
+TOTAL ejecutadas=66, correctas=66, fallidas-abortadas=0, omitidas=0, contenedores fallidos=0

@@ -1,0 +1,47 @@
+%% Vista parcial Libro–Ejemplar dentro del modelo completo de 70 entidades.
+%% No sustituye el PNG original ni la matriz completa.
+classDiagram
+    direction LR
+    class Libro {
+        +Long id
+        +String titulo
+        +String descripcion
+        +String edicion
+        +Integer anioPublicacion
+        +String isbn
+        +Integer numPaginas
+        +boolean estatus
+    }
+    class Ejemplar {
+        +Long id
+        +String codigoBarras
+        +LocalDate fechaAdquisicion
+        +EstadoEjemplar estado
+        +EstadoConservacion estadoConservacion
+        +boolean estatus
+        +String observaciones
+    }
+    class EstadoEjemplar {
+        <<enumeration>>
+        DISPONIBLE
+        PRESTADO
+        RESERVADO
+        MANTENIMIENTO
+        EXTRAVIADO
+        BAJA
+    }
+    class EstadoConservacion {
+        <<enumeration>>
+        EXCELENTE
+        BUENO
+        REGULAR
+        DANADO
+    }
+    Libro "1" <-- "0..*" Ejemplar : libro_id
+    Libro "0..*" --> "0..1" Editorial : editorial_id
+    Libro "0..*" --> "0..1" Idioma : idioma_id
+    Libro "0..*" -- "0..*" Autor : libros_autores
+    Libro "0..*" -- "0..*" Categoria : libros_categorias
+    Ejemplar "0..*" --> "0..1" Ubicacion : ubicacion_id
+    Ejemplar --> EstadoEjemplar : circulacion
+    Ejemplar --> EstadoConservacion : condicionFisica

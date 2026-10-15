@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: ${DB_TEST_URL:jdbc:postgresql://localhost:5432/biblioteca_modelo_test}
+    username: ${DB_TEST_USER:postgres}
+    password: ${DB_TEST_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
