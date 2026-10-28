@@ -1,6 +1,7 @@
--- Ejecutar en biblioteca_modelo_test después de una ejecución real autorizada.
+-- Ejecutar en modeloBiblioteca (demostracion) o biblioteca_modelo_test (tests).
 -- Solo consultas. Las filas de los tests transaccionales se revierten.
-SELECT current_database() AS base_actual;
+SELECT current_database() AS base_actual, current_user AS usuario,
+       inet_server_addr() AS servidor, inet_server_port() AS puerto;
 SELECT version, description, success FROM flyway_schema_history ORDER BY installed_rank;
 SELECT count(*) AS tablas_negocio
 FROM information_schema.tables

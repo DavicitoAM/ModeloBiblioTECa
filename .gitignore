@@ -16,3 +16,9 @@ Thumbs.db
 # Logs
 *.log
 .itspa-tmp/
+# Interfaz web y recursos generados
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+backend/src/main/resources/static/
+backend/respaldos/

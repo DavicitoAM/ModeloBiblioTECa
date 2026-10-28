@@ -21,7 +21,7 @@ public class GuardiaBasePruebas implements ApplicationContextInitializer<Configu
         if (!"/biblioteca_modelo_test".equals(destino.getPath())) {
             throw new IllegalStateException("Pruebas detenidas: la base debe llamarse biblioteca_modelo_test");
         }
-        String normal = context.getEnvironment().getProperty("DB_URL", "jdbc:postgresql://localhost:5432/biblioteca_modelo");
+        String normal = context.getEnvironment().getProperty("DB_URL", "jdbc:postgresql://localhost:5432/modeloBiblioteca");
         URI principal = URI.create(normal.substring("jdbc:".length()));
         int puerto = destino.getPort() == -1 ? 5432 : destino.getPort();
         int puertoPrincipal = principal.getPort() == -1 ? 5432 : principal.getPort();

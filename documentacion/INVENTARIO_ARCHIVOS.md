@@ -67,6 +67,8 @@ Hay **ocho clases de pruebas**, más un inicializador de guardia: nueve fuentes 
 | [V1__piloto_libros_ejemplares.sql](../backend/src/main/resources/db/migration/V1__piloto_libros_ejemplares.sql) | Migración original | Dos tablas; conservada intacta |
 | [V2__modelo_integral_itspa.sql](../backend/src/main/resources/db/migration/V2__modelo_integral_itspa.sql) | Migración de ampliación | 75 tablas nuevas y ampliación de libros/ejemplares; total 77 de negocio |
 | [crear_bases_piloto.sql](../scripts/crear_bases_piloto.sql) | Preparación manual | Bases vacías; no crea tablas de entidades |
+| [iniciar-modelo.ps1](../scripts/iniciar-modelo.ps1) | Arranque del JAR | Java 21, base modeloBiblioteca, contraseña de sesión o solicitada sin guardarla; puerto HTTP configurable |
+| [cargar-demostracion.ps1](../scripts/cargar-demostracion.ps1) | Demostración por API | Libro académico y dos ejemplares; repetición sin duplicados, sin personas ni políticas |
 | [prueba-modelo.ps1](../scripts/prueba-modelo.ps1) | Helper PowerShell | Suite completa, SinBD o SoloMetadatos; Offline evita descargas |
 | [JUnitSinBDLocal.java](../scripts/JUnitSinBDLocal.java) | Ejecutor auxiliar de pruebas | Invoca el motor JUnit instalado para siete clases explícitas; conserva fallos, omisiones y errores de contenedor; no usa Surefire ni JDBC |
 | [verificar_modelo.py](../scripts/verificar_modelo.py) | Verificador estático Python stdlib | Contrasta Java/DDL sin red ni BD; no compila ni ejecuta Java |

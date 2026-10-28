@@ -4,7 +4,7 @@ Esta guía corresponde exclusivamente al **nuevo Sistema Integral de Gestión de
 
 El proyecto contiene el modelo de 70 entidades y nueve enums, con 77 tablas de negocio declaradas. Los servicios y la API disponibles son los de Libro y Ejemplar. Los demás módulos tienen modelo persistente preparado; sus operaciones de negocio requieren desarrollo posterior. Levantar este backend no equivale a tener todos los módulos del sistema funcionando.
 
-**Estado de partida, 15 de octubre de 2026:** compilaron las fuentes de producción y pruebas; pasaron 66 casos sin BD mediante el motor JUnit local. La integración PostgreSQL y el arranque con persistencia real siguen pendientes. En la máquina de origen, Maven encontró dependencias incompletas de Surefire y Clean; no se debe presentar `mvn test` como exitoso hasta obtener su resultado real.
+**Estado verificado, 17 de octubre de 2026:** `mvn clean verify` pasó las 77 pruebas y generó el JAR. `modeloBiblioteca` y `biblioteca_modelo_test` tienen V1/V2, 77 tablas de negocio y 126 FK. El backend se probó en 8081 porque 8080 estaba ocupado; los ejemplos generales de esta guía usan 8080 y deben ajustarse a `SERVER_PORT`. La demostración conserva un libro y dos ejemplares tras reiniciar. Los bloqueos del 15 de octubre son históricos. Consultar [resultados y capturas pendientes](documentacion/PRUEBA_Y_EVIDENCIAS.md).
 
 Fuentes: M02, RF-M02-01/06/07/26/27/30 y RN-M02-03/04/11/12, páginas impresas 16–20 / visor 17–21; RNF-MAN-07, impresa 81 / visor 82. La arquitectura y decisiones están en [README.md](README.md), [AGENTS.md](AGENTS.md) y [DECISIONES_PENDIENTES.md](documentacion/DECISIONES_PENDIENTES.md).
 
@@ -12,7 +12,7 @@ Fuentes: M02, RF-M02-01/06/07/26/27/30 y RN-M02-03/04/11/12, páginas impresas 1
 
 | Archivo | Función |
 |---|---|
-| [scripts/crear_bases_piloto.sql](scripts/crear_bases_piloto.sql) | Crea `biblioteca_modelo` y `biblioteca_modelo_test` vacías; se ejecuta expresamente mediante PostgreSQL |
+| [scripts/crear_bases_piloto.sql](scripts/crear_bases_piloto.sql) | Crea `modeloBiblioteca` y `biblioteca_modelo_test` vacías; se ejecuta expresamente mediante PostgreSQL |
 | [V1](backend/src/main/resources/db/migration/V1__piloto_libros_ejemplares.sql) y [V2](backend/src/main/resources/db/migration/V2__modelo_integral_itspa.sql) | Flyway las aplica automáticamente al iniciar el contexto de integración o arrancar la aplicación; construyen tablas, restricciones y relaciones |
 | [application.yml](backend/src/main/resources/application.yml) | Configura la base de la aplicación, Flyway y Hibernate `validate` |
 | [application-test.yml](backend/src/test/resources/application-test.yml) | Configura la base separada para integración |
@@ -73,7 +73,7 @@ Alternativa con pgAdmin: abre Query Tool sobre la base administrativa `postgres`
 En la misma terminal del paso anterior:
 
 ```powershell
-$env:DB_URL = "jdbc:postgresql://${itspaHostPg}:${itspaPuertoPg}/biblioteca_modelo"
+$env:DB_URL = "jdbc:postgresql://${itspaHostPg}:${itspaPuertoPg}/modeloBiblioteca"
 $env:DB_TEST_URL = "jdbc:postgresql://${itspaHostPg}:${itspaPuertoPg}/biblioteca_modelo_test"
 $env:DB_USER = $itspaUsuarioPg
 $env:DB_TEST_USER = $itspaUsuarioPg
@@ -164,7 +164,7 @@ En la terminal donde configuraste las variables, desde la raíz:
 mvn -f backend/pom.xml spring-boot:run
 ```
 
-No actives el perfil `test` para esta demostración. La aplicación debe conectar a `biblioteca_modelo`, aplicar allí V1/V2, validar el modelo y permanecer atendiendo en `http://localhost:8080`. Si configuraste otro `SERVER_PORT`, ajusta las URL de la demostración.
+No actives el perfil `test` para esta demostración. La aplicación debe conectar a `modeloBiblioteca`, aplicar allí V1/V2, validar el modelo y permanecer atendiendo en `http://localhost:8080`. Si configuraste otro `SERVER_PORT`, ajusta las URL de la demostración.
 
 Conserva esta terminal abierta. Es un backend REST: no incluye una interfaz web ni una pantalla de inicio. Comprueba los endpoints `/api/v1/libros` y `/api/v1/ejemplares`.
 
@@ -211,7 +211,7 @@ El ISBN nulo es válido en el contrato actual; el código de barras generado per
 
 ## 11. Confirmar que los registros quedaron en PostgreSQL
 
-En pgAdmin, conectado a **`biblioteca_modelo`**, ejecuta:
+En pgAdmin, conectado a **`modeloBiblioteca`**, ejecuta:
 
 ```sql
 SELECT current_database();
@@ -252,7 +252,7 @@ Este build vuelve a ejecutar las pruebas e incluye la integración. El JAR usa l
 | Rechazo de la guardia | Nombre exacto de la base de test, separación de `DB_URL` y overrides heredados |
 | Checksum de Flyway o validación Hibernate fallida | Registrar el error y comparar migraciones/esquema; conservar V1, `validate` y el historial; no borrar ni reparar silenciosamente |
 | Puerto HTTP ocupado | Detener la instancia anterior o establecer otro `SERVER_PORT` y actualizar las URL |
-| No aparecen filas después de los tests | Es el rollback esperado; realizar la demostración HTTP en `biblioteca_modelo` |
+| No aparecen filas después de los tests | Es el rollback esperado; realizar la demostración HTTP en `modeloBiblioteca` |
 
 Si una herramienta o conexión está bloqueada por permisos del entorno, registra el impedimento y solicita la autorización correspondiente. No des por superada la fase ni intentes eludir una denegación.
 
@@ -263,13 +263,13 @@ La fase queda aprobada cuando exista evidencia real de:
 1. Herramientas y Java 21 correctos en la máquina que ejecuta el proyecto.
 2. Suite Maven completa: 77 casos actuales, incluidos los 11 de integración, y `BUILD SUCCESS`.
 3. Base de test identificada, V1/V2 exitosas, esquema completo y FK Libro–Ejemplar.
-4. Aplicación arrancada contra `biblioteca_modelo`.
+4. Aplicación arrancada contra `modeloBiblioteca`.
 5. POST/GET de Libro y Ejemplar con sus IDs, estados HTTP y consulta SQL coincidente.
 6. Consulta de los mismos registros después de reiniciar la aplicación.
 
 Toma capturas personales de esos resultados y, para la explicación del código, de los paquetes, anotaciones JPA/Lombok, relación Libro–Ejemplar, repositorios y transacciones de los services. Oculta las contraseñas.
 
-Al realizar esta fase, actualiza [PRUEBA_Y_EVIDENCIAS.md](documentacion/PRUEBA_Y_EVIDENCIAS.md) con fecha, versiones efectivas, comandos, destino de cada base, conteos de pruebas, errores y capturas. Los informes actuales se generan en `backend/target/surefire-reports`; los históricos no sustituyen los resultados del equipo nuevo. Esta guía documenta pasos pendientes y no afirma haberlos ejecutado.
+Al realizar esta fase en otro equipo, actualiza [PRUEBA_Y_EVIDENCIAS.md](documentacion/PRUEBA_Y_EVIDENCIAS.md) con fecha, versiones efectivas, comandos, destino de cada base, conteos de pruebas, errores y capturas. Los informes actuales se generan en `backend/target/surefire-reports`; los históricos no sustituyen los resultados del equipo nuevo. Los resultados reales del 17 de octubre están registrados en la bitácora.
 
 ## 15. Instrucciones para continuar con un asistente
 
@@ -286,7 +286,7 @@ Cuando el responsable solicite ejecutar esta fase:
 El código Java y las migraciones se conservan. Instala JDK 21, Maven 3.9.x y PostgreSQL; utiliza `mvn` directamente, porque el helper PowerShell localiza `mvn.cmd`. Clona el repositorio y, desde su raíz, configura `JAVA_HOME` con tu ruta local y establece las variables de sesión. El bloque siguiente supone que las dos bases todavía no existen y se detiene ante errores:
 
 ```bash
-export DB_URL='jdbc:postgresql://127.0.0.1:5432/biblioteca_modelo'
+export DB_URL='jdbc:postgresql://127.0.0.1:5432/modeloBiblioteca'
 export DB_TEST_URL='jdbc:postgresql://127.0.0.1:5432/biblioteca_modelo_test'
 read -r -p 'Usuario PostgreSQL: ' DB_USER
 export DB_USER

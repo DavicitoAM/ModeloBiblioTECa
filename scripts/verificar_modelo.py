@@ -678,9 +678,13 @@ class Audit:
         if len(files) != 2 or not files[0].name.startswith("V1__") or not files[1].name.startswith("V2__"):
             self.error("Se requieren exactamente V1 y V2; migraciones inesperadas")
         v1 = migrations / "V1__piloto_libros_ejemplares.sql"
-        actual_hash = hashlib.sha256(v1.read_bytes()).hexdigest().upper()
+        v1_bytes = v1.read_bytes()
+        actual_hash = hashlib.sha256(v1_bytes).hexdigest().upper()
         self.stats["sha256_v1"] = actual_hash
-        if actual_hash != V1_SHA256:
+        # Git puede convertir LF a CRLF en Windows sin cambiar el SQL versionado.
+        canonical_hash = hashlib.sha256(v1_bytes.replace(b"\r\n", b"\n")).hexdigest().upper()
+        self.stats["sha256_v1_lf"] = canonical_hash
+        if canonical_hash != V1_SHA256:
             self.error("V1 fue modificada: SHA-256 distinto del original")
         for path in files:
             self.schema.parse(path.read_text(encoding="utf-8-sig"), path.name)

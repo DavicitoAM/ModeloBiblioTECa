@@ -8,7 +8,7 @@ Las páginas se indican como **impresa / física del visor**. Cada entidad tiene
 | M02, pp. 15–21 / 16–22; RF-M02-01/02/05/13/19/23/49, RN-M02-03/09/12 | Catálogo, autores, categorías, editorial e idioma | Ocho entidades y dos enums en modelo/catalogo | Modelo y DDL; API solo de Libro/Ejemplar básico |
 | M02, p. 16 / 17; RF-M02-01/02/06 | Registrar Libro y datos bibliográficos | Libro, repositorio, servicio, DTOs y controlador | Flujo implementado; resultado real en bitácora |
 | M02, p. 18 / 19; RF-M02-26/27/28/30/33 | Registrar y consultar Ejemplar | Ejemplar, repositorio, servicio, DTOs y controlador | Flujo implementado; código único y FK en SQL |
-| M02, p. 20 / 21; RN-M02-03/04 | Libro admite 0..N ejemplares; cada copia es de un libro | Libro.ejemplares / Ejemplar.libro / libro_id | JPA y FK; pruebas de recarga preparadas |
+| M02, p. 20 / 21; RN-M02-03/04 | Libro admite 0..N ejemplares; cada copia es de un libro | Libro.ejemplares / Ejemplar.libro / libro_id | JPA, FK y recarga probadas en PostgreSQL el 17 de octubre |
 | M02, p. 20 / 21; RN-M02-11/12 | ISBN opcional y control de duplicados | Libro.isbn, servicio, repositorio y UNIQUE de V1 | Trim y vacío→null; normalización completa pendiente |
 | M02, pp. 20–21 / 21–22; RN-M02-13/14/16/17/24 | Circulación, conservación, ubicación e historial | Enums, Ubicacion, HistorialEstadoEjemplar | Modelo y estado inicial del alta; reglas/historial automático pendientes |
 | M03, pp. 22–28 / 23–29; RF-M03-07/27/40/63, RN-M03-03/04/13/14/22 | Préstamo, detalle, devolución única, renovación y política | Cinco entidades y dos enums en modelo/prestamos | Modelo y DDL; sin autorizar préstamos/devolver/renovar |
@@ -18,7 +18,7 @@ Las páginas se indican como **impresa / física del visor**. Cada entidad tiene
 | M07, pp. 52–59 / 53–60; RF-M07-06/38/47/54/67/70, RN-M07-10/14/15/24 | Notificación, lectura, intentos, preferencias y avisos | Ocho entidades en modelo/notificaciones | Modelo y DDL; sin envíos ni interpretación de destinos polimórficos |
 | M08, pp. 60–67 / 61–68; RF-M08-01/70/78/85, RN-M08-05/09/24/25/29 | Reportes, indicadores, exportación e historial | Siete entidades en modelo/reportes | Modelo y DDL; sin consultas/cálculos/archivos/tareas |
 | M09/M10, pp. 68–76 / 69–77; RF-M09-01/10/26/43/47/59/67, RN-M09-02/14/17/22/27/32 | Configuración, política, auditoría, sesiones, incidentes y respaldos | Ocho entidades en modelo/configuracion | Modelo y DDL; sin seguridad/respaldos/auditoría automáticos |
-| RNF-MAN-03/07/08, p. 81 / 82; RNF-INT-01/03/04, p. 82 / 83 | Capas, modelo persistente y acceso a datos | Unidad JPA, Flyway V1/V2, validate y DTOs | Arquitectura en archivos; esquema real PostgreSQL pendiente |
+| RNF-MAN-03/07/08, p. 81 / 82; RNF-INT-01/03/04, p. 82 / 83 | Capas, modelo persistente y acceso a datos | Unidad JPA, Flyway V1/V2, validate y DTOs | Esquema validado en ambas bases; 77 pruebas Maven correctas el 17 de octubre |
 
 ## Pruebas preparadas y evidencia
 
@@ -35,4 +35,4 @@ Las páginas se indican como **impresa / física del visor**. Cada entidad tiene
 | scripts/verificar_modelo.py | Correspondencia estática Java/DDL sin red ni BD | Compilación Java, metadatos ejecutados o migraciones aplicadas |
 | GuardiaBasePruebas.java | Detener la integración si el destino no es biblioteca_modelo_test | Disponibilidad o permisos de la BD |
 
-RNF-MAN-07 (p. 81 / 82) respalda las pruebas y el ejecutor auxiliar. Los 66 casos sin BD pasaron mediante JUnit local; los 11 PostgreSQL permanecen pendientes. La normalización completa del ISBN sigue pendiente y no se cambió al añadir pruebas. Consulta [PRUEBA_Y_EVIDENCIAS.md](PRUEBA_Y_EVIDENCIAS.md) para comandos, resultados reales, impedimentos y capturas pendientes.
+RNF-MAN-07 (p. 81 / 82) respalda las pruebas y el ejecutor auxiliar. El 17 de octubre pasaron con Maven los 77 casos: 66 sin BD y 11 PostgreSQL. Se comprobó además la API real y la persistencia después de reiniciar. La normalización completa del ISBN sigue pendiente. Consulta [PRUEBA_Y_EVIDENCIAS.md](PRUEBA_Y_EVIDENCIAS.md) para comandos, resultados reales, advertencias y capturas personales pendientes.

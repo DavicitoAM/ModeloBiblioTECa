@@ -27,9 +27,9 @@ Java 21, Spring Boot 3.5.6, PostgreSQL, Flyway y Lombok son decisiones técnicas
 | Repositorios | `LibroRepositorio` y `EjemplarRepositorio` |
 | Servicios | Dos contratos y sus dos implementaciones en `services/impl` |
 | HTTP | Dos recursos: `/api/v1/libros` y `/api/v1/ejemplares` |
-| Pruebas | 66 casos sin BD ejecutados con JUnit local; 11 de integración PostgreSQL preparados |
+| Pruebas | 77 casos ejecutados con Maven: 66 sin BD y 11 de integración PostgreSQL |
 
-Estos conteos describen código y SQL, **no tablas verificadas en una BD ejecutada**. `flyway_schema_history` es una tabla técnica adicional, fuera de las 77 de negocio. Los comandos y resultados reales corresponden a [PRUEBA_Y_EVIDENCIAS.md](documentacion/PRUEBA_Y_EVIDENCIAS.md).
+El 17 de octubre se verificaron las 77 tablas de negocio y las 126 FK en `modeloBiblioteca` y `biblioteca_modelo_test`, mediante PostgreSQL real y Hibernate `validate`. `flyway_schema_history` es una tabla técnica adicional. Los comandos y resultados corresponden a [PRUEBA_Y_EVIDENCIAS.md](documentacion/PRUEBA_Y_EVIDENCIAS.md).
 
 ## Organización
 
@@ -80,7 +80,7 @@ Se requieren JDK 21, Maven 3.9+ y PostgreSQL. No hay Maven Wrapper. Comprueba `j
 Desde pgAdmin, conectado a la base administrativa `postgres`, prepara bases separadas cuando corresponda:
 
 ```sql
-CREATE DATABASE biblioteca_modelo;
+CREATE DATABASE "modeloBiblioteca";
 CREATE DATABASE biblioteca_modelo_test;
 ```
 
@@ -98,7 +98,7 @@ mvn '-Dtest=ModeloMetadatosTest' test
 # Suite completa: necesita biblioteca_modelo_test y ambas migraciones.
 mvn clean test
 
-# Aplicación: necesita biblioteca_modelo.
+# Aplicación: necesita modeloBiblioteca.
 mvn spring-boot:run
 ```
 
@@ -108,7 +108,11 @@ Para una revisión estática sin red ni BD: `python scripts/verificar_modelo.py`
 
 La integración usa el perfil `test`. Su guardia exige la BD `biblioteca_modelo_test` antes de iniciar Flyway. Las pruebas escriben datos únicamente de Libro/Ejemplar y verifican reversión transaccional; las migraciones crean el esquema completo de test y permanecen aplicadas. Comprueba el destino efectivo antes de ejecutar.
 
-Estado del 15 de octubre: compilan las fuentes de producción y los nueve archivos de pruebas. Pasaron los **66 casos sin BD** mediante el motor JUnit Jupiter 5.12.2 instalado, sin descargas. `mvn test` sigue bloqueado por dependencias incompletas de Surefire; `clean test` encuentra además una dependencia faltante de Clean. No se autorizaron descargas fuera del sandbox. La integración PostgreSQL continúa pendiente. El [procedimiento sin BD](documentacion/PRUEBAS_SIN_BD.md) explica la ejecución habitual y la alternativa local; la [bitácora](documentacion/PRUEBA_Y_EVIDENCIAS.md) conserva los resultados reales.
+Estado del 17 de octubre: `mvn clean verify` terminó con **BUILD SUCCESS: 77 pruebas, cero fallos, errores u omisiones**, incluyendo integración PostgreSQL y empaquetado ejecutable. Se resolvieron las dependencias pendientes con autorización de ejecución. V1/V2 están aplicadas en ambas bases. `modeloBiblioteca` conserva un libro académico y dos ejemplares incluso después de reiniciar. Se utilizó JDK 21 de Temurin, descargado y verificado dentro de `.itspa-tmp/jdk21/`, sin cambiar el Java global. La [bitácora](documentacion/PRUEBA_Y_EVIDENCIAS.md) conserva las pruebas y la advertencia de compatibilidad Flyway/PostgreSQL 18.
+
+Para arrancar el JAR construido desde la raíz: `./scripts/iniciar-modelo.ps1 -PuertoHttp 8081`. Solicita la contraseña sin guardarla; usa `JAVA_HOME` con JDK 21 o, si no está definido, el JDK local mencionado. El puerto 8080 estaba ocupado, por lo que la ejecución de esta sesión usa **8081**. La conexión sigue siendo PostgreSQL `127.0.0.1:5432`, usuario `postgres`, base `modeloBiblioteca`. En pgAdmin basta actualizar el nodo de bases del servidor correspondiente; la base ya está preparada.
+
+Para repetir la demostración sin duplicar sus filas: `./scripts/cargar-demostracion.ps1 -BaseUrl http://localhost:8081`. Para consultar esquema y registros en pgAdmin: [scripts/verificar_esquema.sql](scripts/verificar_esquema.sql). Las comillas de `CREATE DATABASE "modeloBiblioteca"` conservan la B mayúscula; no crear otra base con el nombre convertido a minúsculas.
 
 ## Demostración HTTP de Libro y Ejemplar
 
@@ -158,3 +162,19 @@ La demostración HTTP crea filas en la BD de aplicación; las filas de los tests
 - [Pruebas y capturas académicas](documentacion/PRUEBA_Y_EVIDENCIAS.md).
 
 Los ficheros de `agentes/` son instrucciones reutilizables. Una herramienta debe leerlos y asignar trabajo expresamente para producir delegación real. Aplica el [skill ITSPA](skills/modelado-jpa-itspa/SKILL.md). Otros repositorios, servicios, endpoints, frontend y motores de reglas requieren una nueva tarea autorizada.
+
+## Interfaz renovada — 26 de octubre de 2026
+
+El pedido actual autoriza la renovación del frontend existente. Está implementada en blanco y azul con Bootstrap Grid, AdminLTE, DataTables, Chosen, jQuery, Date Range Picker, OverlayScrollbars, Ionicons, Tempus Dominus, jqvmap, Summernote, SweetAlert2 y Toastr. Incluye menú plegable, apartados desplegables y vistas operativas conectadas a los recursos existentes. El modelo y las migraciones se conservan.
+
+El diseño, la cobertura de módulos y los comandos están en [INTERFAZ_Y_RECORRIDOS.md](documentacion/INTERFAZ_Y_RECORRIDOS.md), sección del 26 de octubre. La salida compilada está incluida en el JAR local de `backend/target`; al arrancar el backend se sirve la interfaz desde la misma aplicación. Para desarrollo separado: `cd frontend` y `npm run dev`, con el proxy existente al backend en 8081. Para regenerar los recursos: `./scripts/preparar-interfaz.ps1` antes de empaquetar Maven.
+
+Verificación de esta renovación: 4 pruebas de navegación, suite de navegador de 10 casos contabilizados (API interceptada), build frontend, auditoría sin vulnerabilidades reportadas y Maven `clean verify` con Java 21 y 69 pruebas sin BD. La conexión real a PostgreSQL se verifica por separado; consultar [PRUEBA_Y_EVIDENCIAS.md](documentacion/PRUEBA_Y_EVIDENCIAS.md).
+
+## Arranque conjunto y conexión — 28 de octubre de 2026
+
+Para iniciar ambos servicios, desde la raíz usa `./scripts/iniciar-sistema.ps1` e introduce la contraseña PostgreSQL en la terminal cuando se solicite. El lanzador espera a que el backend responda antes de abrir la interfaz. Se accede en `http://127.0.0.1:5173/`; conserva abierta la terminal del lanzador.
+
+`./scripts/iniciar-sistema.ps1 -Comprobar` verifica dependencias, servicios y destino del proxy sin solicitar claves ni iniciar procesos. Para otros puertos: `./scripts/iniciar-sistema.ps1 -PuertoApi 8082 -PuertoInterfaz 5174`. El destino del frontend se adapta al puerto elegido; no se debe cambiar solo uno de los servicios manualmente. Una interfaz ya abierta con otro destino debe reiniciarse o utilizar otro puerto.
+
+La desconexión ahora muestra un único aviso y recupera automáticamente la sesión real al estar disponible el backend. El arranque correcto del 28 de octubre se comprobó con la API real y el navegador, sin errores de conexión. Detalles y límites de verificación en `documentacion/PRUEBA_Y_EVIDENCIAS.md`.

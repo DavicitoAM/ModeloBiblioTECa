@@ -1,0 +1,42 @@
+export const tecPalette = {
+  blue: {
+    950: '#081426',
+    900: '#0D1D36',
+    800: '#122848',
+    700: '#163158',
+    600: '#1B396A',
+    500: '#2F527F',
+    400: '#527099',
+    300: '#8196B3',
+    200: '#B6C2D3',
+    100: '#E8EDF3',
+    50: '#F5F7FA',
+  },
+  gray: {
+    900: '#242326',
+    800: '#3A393C',
+    700: '#555457',
+    600: '#6C6A6E',
+    500: '#807E82',
+    400: '#A1A0A3',
+    300: '#C7C6C8',
+    200: '#E2E1E3',
+    100: '#F0F0F1',
+    50: '#F8F8F9',
+  },
+  black: '#000000',
+  white: '#FFFFFF',
+  success: '#287A50',
+  successSoft: '#E8F4EE',
+  warning: '#9A6712',
+  warningSoft: '#FFF4DC',
+  danger: '#A23B3B',
+  dangerSoft: '#FCEAEA',
+} as const
+
+export const radius = {
+  sm: 12,
+  md: 18,
+  lg: 26,
+  xl: 34,
+} as const

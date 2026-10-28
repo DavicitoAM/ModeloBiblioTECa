@@ -14,7 +14,7 @@ class GuardiaBasePruebasTest {
         }
     }
     @Test void rechazaLaBaseNormalAntesDeIniciarFlyway() {
-        try (var ctx = contexto("jdbc:postgresql://localhost:5432/biblioteca_modelo", null)) {
+        try (var ctx = contexto("jdbc:postgresql://localhost:5432/modeloBiblioteca", null)) {
             assertThatThrownBy(() -> new GuardiaBasePruebas().initialize(ctx)).isInstanceOf(IllegalStateException.class);
         }
     }
@@ -41,14 +41,14 @@ class GuardiaBasePruebasTest {
     private void rechazaOverride(String propiedad) {
         try (var ctx = contexto("jdbc:postgresql://localhost:5432/biblioteca_modelo_test", null)) {
             ctx.getEnvironment().getPropertySources().addFirst(new MapPropertySource("alternativa",
-                Map.of(propiedad, "jdbc:postgresql://localhost:5432/biblioteca_modelo")));
+                Map.of(propiedad, "jdbc:postgresql://localhost:5432/modeloBiblioteca")));
             assertThatThrownBy(() -> new GuardiaBasePruebas().initialize(ctx)).isInstanceOf(IllegalStateException.class);
         }
     }
     private GenericApplicationContext contexto(String url, String principal) {
         var ctx = new GenericApplicationContext();
         Map<String, Object> valores = new HashMap<>(); valores.put("spring.datasource.url", url);
-        valores.put("DB_URL", principal == null ? "jdbc:postgresql://localhost:5432/biblioteca_modelo" : principal);
+        valores.put("DB_URL", principal == null ? "jdbc:postgresql://localhost:5432/modeloBiblioteca" : principal);
         ctx.getEnvironment().getPropertySources().addFirst(new MapPropertySource("prueba", valores));
         return ctx;
     }

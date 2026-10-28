@@ -1,0 +1,183 @@
+{
+  "fecha": "2026-10-17",
+  "metodo": "Capturas reales de VS Code y pgAdmin mediante Computer Use. Los recortes solo eliminan margenes; no se reconstruyo ni altero el contenido.",
+  "documento": "https://docs.google.com/document/d/1P4nmuiTjjBGLzSr9EpMOgwBAYPSAY4yt_Fs3FcqnpoM/edit?usp=drivesdk",
+  "capturas": [
+    {
+      "archivo_original": "01-libro-original.png",
+      "sha256": "103f0997ddec3396a4bc95935482e378caeadb66269c5499981d29ec35661c00",
+      "recorte": [
+        412,
+        375,
+        1290,
+        817
+      ],
+      "archivo_reporte": "libro.png"
+    },
+    {
+      "archivo_original": "02-ejemplar-original.png",
+      "sha256": "f74d33edde24102de48f3edeae593a18a92692b8299ce16e989b49caf80dde45",
+      "recorte": [
+        412,
+        103,
+        1290,
+        751
+      ],
+      "archivo_reporte": "ejemplar.png"
+    },
+    {
+      "archivo_original": "03-relacion-libro-original.png",
+      "sha256": "709d45a5c2716fabee27497a9457cb89291add0dc1df2bf00ed6fab3429536f6",
+      "recorte": [
+        412,
+        370,
+        1290,
+        666
+      ],
+      "archivo_reporte": "relacion.png"
+    },
+    {
+      "archivo_original": "04-persona-original.png",
+      "sha256": "eec315b804ab58f802cdece7a74825a3ac2aa3371ea2319cf2cf3fd366e58aaa",
+      "recorte": [
+        412,
+        146,
+        1290,
+        550
+      ],
+      "archivo_reporte": "persona.png"
+    },
+    {
+      "archivo_original": "05-repositorio-libro-original.png",
+      "sha256": "af55d00c250a7234403c2d82b128a9fe8ee7986169db68cb4c1d56b93b07ecbc",
+      "recorte": [
+        412,
+        102,
+        1288,
+        333
+      ],
+      "archivo_reporte": "repo_libro.png"
+    },
+    {
+      "archivo_original": "06-repositorio-ejemplar-original.png",
+      "sha256": "bd1c050b7c7c1da0c48c3bfae7c08e9a103a6c46810de173164f4c7959153e8a",
+      "recorte": [
+        412,
+        102,
+        1288,
+        333
+      ],
+      "archivo_reporte": "repo_ejemplar.png"
+    },
+    {
+      "archivo_original": "07-service-libro-original.png",
+      "sha256": "ce413dcaafbf3afbddc62f3cb8c75d6299eac7871231ca79274a353b56039b33",
+      "recorte": [
+        412,
+        102,
+        1290,
+        672
+      ],
+      "archivo_reporte": "service_libro.png"
+    },
+    {
+      "archivo_original": "08-service-ejemplar-original.png",
+      "sha256": "fb1735ea5bc229d1e30881be323cd7552faa55e17fe11d49ffc83696df361391",
+      "recorte": [
+        412,
+        267,
+        1290,
+        710
+      ],
+      "archivo_reporte": "service_ejemplar.png"
+    },
+    {
+      "archivo_original": "09-test-contexto-original.png",
+      "sha256": "9e5b4ff476b416e638daa96c347cbdd03ee3fe60e5cfbb9840d78fe07e12957d",
+      "recorte": [
+        412,
+        211,
+        1290,
+        488
+      ],
+      "archivo_reporte": "test_contexto.png"
+    },
+    {
+      "archivo_original": "10-test-relacion-original.png",
+      "sha256": "3113da463695d1f4659a5b335fbc9a859e2ded45592dbc1433bd7ff2534f9e7e",
+      "recorte": [
+        412,
+        232,
+        1290,
+        581
+      ],
+      "archivo_reporte": "test_relacion.png"
+    },
+    {
+      "archivo_original": "11-resultados-original.png",
+      "sha256": "4063a186d4e3cf32e616bac0d52b7b328da7db1950a2cc20eef5ed6c32caf79a",
+      "recorte": [
+        412,
+        307,
+        1290,
+        600
+      ],
+      "archivo_reporte": "resultados.png"
+    },
+    {
+      "archivo_original": "12-pgadmin-registros-compacto-original.png",
+      "sha256": "fdd25a7fa231044efddbebef4d5e5102926a392998320d84a61795d8fa7de4cf",
+      "recorte": [
+        263,
+        81,
+        900,
+        347
+      ],
+      "archivo_reporte": "registros.png"
+    },
+    {
+      "archivo_original": "13-pgadmin-campos-original.png",
+      "sha256": "d5b6365bef402499c1f83b1973236c26e69f277172bc4f2722d76b5caa016789",
+      "recorte": [
+        263,
+        81,
+        899,
+        545
+      ],
+      "archivo_reporte": "campos.png"
+    },
+    {
+      "archivo_original": "14-pgadmin-fk-original.png",
+      "sha256": "69ce2a0c435e7e266a05990639e00c5f18532b78f24bb024ef2dfde8cd21296a",
+      "recorte": [
+        263,
+        81,
+        1000,
+        319
+      ],
+      "archivo_reporte": "fk.png"
+    },
+    {
+      "archivo_original": "15-pgadmin-flyway-original.png",
+      "sha256": "c062742a1d29aead4705acdcdd1cf7b6b58a149debbba393ec32456a7fda3710",
+      "recorte": [
+        263,
+        81,
+        805,
+        347
+      ],
+      "archivo_reporte": "flyway.png"
+    },
+    {
+      "archivo_original": "01-libro-original.png",
+      "recorte": [
+        412,
+        375,
+        1290,
+        639
+      ],
+      "archivo_reporte": "libro-corto.png",
+      "motivo": "Mostrar el nucleo JPA y Lombok con tipografia legible, conservando el original completo"
+    }
+  ]
+}

@@ -9,10 +9,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-/**
- * M01, PDF p. impresa 11 (fisica 12), RF-M01-27; atributos y relacion del diagrama M01.
- * Catalogo persistente de motivos, sin inventar ni precargar valores institucionales.
- */
+
 @Entity
 @Table(name = "motivos_visita")
 @Getter

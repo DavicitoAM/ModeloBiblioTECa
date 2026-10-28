@@ -32,6 +32,9 @@ Las páginas se expresan como **impresa / física del visor**. Se distingue fuen
 | D-22 | M09 pp. 68–76 / 69–77, RF-M09-29/43/46/62 y RN-M09-08/09/14/22/32 | Responsable opcional y origen automático; detalle ligado a evento; incidente con eventos/acciones | No secretos; sin sanitización, permisos, retención ni auditoría automáticos |
 | D-23 | RN-M02-11/12, p. 20 / 21; ISBN UNIQUE en V1 | Servicio aplica trim y vacío→null; conserva UNIQUE | Normalización bibliográfica completa y precisión por edición pendientes |
 | D-24 | Restricciones reales de ejecución | Separar revisión estática, metadatos sin JDBC e integración PostgreSQL | Resultados/impedimentos solo en PRUEBA_Y_EVIDENCIAS.md; archivos no acreditan éxito |
+| D-25 | Pedido expreso del 17 de octubre: nombre `modeloBiblioteca` y pruebas de conexión | Base normal con B mayúscula; se conserva `biblioteca_modelo_test` para la guardia de aislamiento; credenciales solo en procesos | Aplicado y verificado; no modificar nombres de tablas ni V1/V2 |
+| D-26 | Advertencia real de Flyway 11.7.2 al conectar PostgreSQL 18.6: soporte probado hasta 17 | Mantener las versiones declaradas durante la validación solicitada; migraciones y 77 pruebas correctas | Revisar una actualización compatible de Flyway/Spring Boot antes de despliegue; pendiente, sin autorización tácita de cambio |
+| D-27 | Clon Windows: V1 con CRLF, índice Git con LF | Verificador muestra hash físico y compara el hash tras normalizar solo CRLF a LF | Contenido original comprobado; migración intacta y sin sustituir el checksum de Flyway |
 
 ## Atributos y tipos
 
@@ -42,3 +45,17 @@ Estados/tipos sin vocabulario cerrado se conservan como String con longitud expl
 ## Continuidad
 
 Ante una diferencia nueva, registrar requisito, páginas, alternativas y decisión antes de cambiar identidad, cardinalidad o esquema. Los acuerdos expresos anteriores siguen vigentes y no exigen volver a solicitar la misma autorización. Una migración aplicada se conserva; posteriores ajustes usan otra migración aprobada.
+
+## Autorización de interfaz — 26 de octubre de 2026
+
+El pedido expreso actual sustituye la restricción histórica «sin frontend» para la renovación de la interfaz ya existente. Autoriza el panel blanco/azul, Bootstrap/AdminLTE y los complementos de `INTERFAZ_Y_RECORRIDOS.md`, con todas las vistas y acciones existentes. No autoriza cambios implícitos de cardinalidad, políticas, migraciones, credenciales, proveedores externos ni restauración destructiva. Se conserva el acceso directo autorizado anteriormente y la restricción de cuentas humanas en ese modo.
+
+Los nombres escritos `adminite`, `datrangepicker`, `tempusominus` y `jqmap` se interpretan como AdminLTE, Date Range Picker, Tempus Dominus y jqvmap. Se elige Bootstrap 4 + AdminLTE 3 para compatibilidad con Chosen/jQuery y Tempus Dominus Bootstrap 4; esta decisión es de interfaz, sin impacto en el modelo académico. Summernote conserva salida textual porque la API y las vistas presentan mensajes como texto; no se amplía el contrato a HTML.
+
+La ejecución UI se realiza con fixtures interceptados, exclusivamente de prueba. El backend `127.0.0.1:8081` no respondía durante la renovación; no se atribuyen escrituras, capturas PostgreSQL ni recorridos reales a esa prueba. La integración institucional y los pendientes previos continúan sujetos a sus acuerdos expresos.
+
+## Corrección de conexión — 28 de octubre de 2026
+
+Se conserva 8081 como puerto del backend, porque la causa comprobada fue ausencia del proceso antes de introducir la contraseña PostgreSQL. El responsable autorizó otros puertos en caso necesario. El nuevo lanzador permite `-PuertoApi` / `-PuertoInterfaz` y transmite el destino al proxy mediante `ITSPA_API_TARGET`, sin modificar configuración persistente ni autenticación de PostgreSQL.
+
+No se resuelve una desconexión con usuarios ficticios, datos de demostración automáticos, credenciales guardadas, cambios de `pg_hba.conf` ni sustitución de la base. La interfaz presenta un estado único y vuelve a consultar la sesión real. Después de que el responsable confirmó el arranque, se verificó la API y su proxy con respuestas reales; ver PRUEBA_Y_EVIDENCIAS.md. No cambia ninguna decisión de modelo o esquema.
